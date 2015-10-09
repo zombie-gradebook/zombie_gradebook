@@ -57,7 +57,10 @@ class TeachersController < ApplicationController
       params.require(:teacher).permit(:name, :email, :password)
     end
 
-    def logged_in?
-      redirect_to login_path, notice: "You must log in to do that" unless session[:logged_in_teacher]
+    def allow_access?
+      # authorizes teachers to access desired pages
+      unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
+        redirect_to login_path, notice: "You don't have access to this"
+      end
     end
 end

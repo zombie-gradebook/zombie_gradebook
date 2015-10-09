@@ -57,7 +57,4 @@ class ParentsController < ApplicationController
       params.require(:parent).permit(:name, :email, :password, :student_id)
     end
 
-    def logged_in?
-      redirect_to login_path, notice: "You must log in to do that" unless session[:logged_in_teacher]
-    end
 end
