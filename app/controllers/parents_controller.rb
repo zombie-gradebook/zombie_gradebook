@@ -1,5 +1,6 @@
 class ParentsController < ApplicationController
   before_action :set_parent, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?
 
   # GET /parents
   def index
@@ -54,5 +55,9 @@ class ParentsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def parent_params
       params.require(:parent).permit(:name, :email, :password, :student_id)
+    end
+
+    def logged_in?
+      redirect_to login_path, notice: "You must log in to do that" unless session[:logged_in_teacher]
     end
 end
