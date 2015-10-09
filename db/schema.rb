@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20151009161216) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "student_id"
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

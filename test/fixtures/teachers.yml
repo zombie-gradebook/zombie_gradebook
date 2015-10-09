@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Jace Beleren
+  email: mind_sculptor@mtg.com
+  password_digest: pword
+
+two:
+  name: Lilliana Vess
+  email: veil_master@mtg.com
+  password_digest: pword
