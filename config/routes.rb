@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
 
+=======
+  resources :students
+>>>>>>> students2
   resources :teachers
   resources :parents
   resources :grades
