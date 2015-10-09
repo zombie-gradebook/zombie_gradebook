@@ -1,5 +1,6 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in?
 
   # GET /grades
   def index
@@ -49,6 +50,10 @@ class GradesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_grade
       @grade = Grade.find(params[:id])
+    end
+
+    def logged_in?
+      redirect_to login_path, notice: "You must log in to do that." unless session[:logged_in_teacher]
     end
 
     # Only allow a trusted parameter "white list" through.
