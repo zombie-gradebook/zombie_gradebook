@@ -1,6 +1,8 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
+  before_action :allow_access?, only: [:edit]
+  before_action :teacher?, only: [:index, :new,]
 
   # GET /teachers
   def index
@@ -60,6 +62,13 @@ class TeachersController < ApplicationController
     def allow_access?
       # authorizes teachers to access desired pages
       unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
+        redirect_to login_path, notice: "You don't have access to this"
+      end
+    end
+
+    def teacher?
+      # authorizes teachers to access desired pages
+      unless session[:user_type]=="teacher"
         redirect_to login_path, notice: "You don't have access to this"
       end
     end

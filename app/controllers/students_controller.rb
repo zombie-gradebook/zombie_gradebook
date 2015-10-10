@@ -1,11 +1,11 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
-  before_action :allow_access?, only: [:index, :edit, :show]
+  before_action :allow_access?, only: [:new, :edit, :create, :update, :destroy, :index]
 
   # GET /students
   def index
-    @students = Student.where(teacher_id: params[:teacher_id])
+    @students = Student.where(student_id: params[:student_id])
   end
 
   # GET /students/1
@@ -60,15 +60,16 @@ class StudentsController < ApplicationController
 
     def allow_access?
       # authorizes students to access desired pages
-      unless session[:user_type]=="student" && session[:user_id] == @student.id
+      unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
         redirect_to login_path, notice: "You don't have access to this"
       end
-
-      # authorizes teacher to access desired pages
-      unless session[:user_type]=="teacher"
-        redirect_to login_path, notice: "You don't have access to this"
-      end
-
     end
+
+      # # authorizes teacher to access desired pages
+      # unless session[:user_type]=="teacher"
+      #   redirect_to login_path, notice: "You don't have access to this"
+      # end
+    #
+    # end
 
 end
