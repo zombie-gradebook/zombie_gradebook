@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
 
   # GET /students
   def index
-    @students = Student.where(student_id: params[:student_id])
+    @students = Student.all
   end
 
   # GET /students/1
@@ -48,28 +48,29 @@ class StudentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_student
-      @student = Student.find(params[:id])
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_student
+    @student = Student.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def student_params
+    params.require(:student).permit(:name, :email, :password, :teacher_id)
+  end
+
+  def allow_access?
+    # authorizes students to access desired pages
+  #   unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
+  #     redirect_to login_path, notice: "You don't have access to this"
+  #   end
+  # end
+
+    # authorizes teacher to access desired pages
+    unless session[:user_type]=="teacher"
+      redirect_to login_path, notice: "You don't have access to this"
     end
 
-    # Only allow a trusted parameter "white list" through.
-    def student_params
-      params.require(:student).permit(:name, :email, :password, :teacher_id)
-    end
-
-    def allow_access?
-      # authorizes students to access desired pages
-      unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
-        redirect_to login_path, notice: "You don't have access to this"
-      end
-    end
-
-      # # authorizes teacher to access desired pages
-      # unless session[:user_type]=="teacher"
-      #   redirect_to login_path, notice: "You don't have access to this"
-      # end
-    #
-    # end
+  end
 
 end

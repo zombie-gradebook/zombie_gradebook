@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:logged_in_user] = false
+    session[:user_id] = false
     session[:user_type] = false
     redirect_to root_path, notice: "You are now logged out."
   end

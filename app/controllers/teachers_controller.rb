@@ -1,7 +1,7 @@
 class TeachersController < ApplicationController
   before_action :set_teacher, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
-  before_action :allow_access?, only: [:edit]
+  before_action :allow_access?, only: [:edit, :destroy]
   before_action :teacher?, only: [:index, :new,]
 
   # GET /teachers
@@ -49,27 +49,28 @@ class TeachersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_teacher
-      @teacher = Teacher.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_teacher
+    @teacher = Teacher.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def teacher_params
-      params.require(:teacher).permit(:name, :email, :password)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def teacher_params
+    params.require(:teacher).permit(:name, :email, :password)
+  end
 
-    def allow_access?
-      # authorizes teachers to access desired pages
-      unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
-        redirect_to login_path, notice: "You don't have access to this"
-      end
+  def allow_access?
+    # authorizes teachers to access desired pages
+    unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
+      redirect_to login_path, notice: "You don't have access to this"
     end
+  end
 
-    def teacher?
-      # authorizes teachers to access desired pages
-      unless session[:user_type]=="teacher"
-        redirect_to login_path, notice: "You don't have access to this"
-      end
+  def teacher?
+    # authorizes teachers to access desired pages
+    unless session[:user_type]=="teacher"
+      redirect_to login_path, notice: "You don't have access to this"
     end
+  end
 end
