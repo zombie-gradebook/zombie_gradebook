@@ -1,6 +1,7 @@
 class GradesController < ApplicationController
   before_action :set_grade, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
+  # before_action :teacher?, only: [:index, :new]
 
   # GET /grades
   def index
@@ -52,8 +53,17 @@ class GradesController < ApplicationController
       @grade = Grade.find(params[:id])
     end
 
-    def logged_in?
-      redirect_to login_path, notice: "You must log in to do that." unless session[:logged_in_teacher]
+    # authorizes students to access desired pages
+    def allow_access?
+    #   unless session[:user_type]=="teacher" && session[:user_id] == @teacher.id
+    #     redirect_to login_path, notice: "You don't have access to this"
+    #   end
+    # end
+
+      # authorizes teacher to access desired pages
+      unless session[:user_type]=="teacher"
+        redirect_to login_path, notice: "You don't have access to this"
+      end
     end
 
     # Only allow a trusted parameter "white list" through.

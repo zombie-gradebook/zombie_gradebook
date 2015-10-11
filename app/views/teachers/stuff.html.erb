@@ -1,0 +1,19 @@
+<table>
+      <tr>
+        <td colspan="1"><h5><%= student.name %></h5></td>
+        <td><h5><%= student.email %></h5</td>
+      </tr>
+      <tr>
+        <td><%= link_to 'Show Student Info', student %></td>
+        <td><%= link_to 'Edit Student Info', edit_student_path(student) %></td>
+        <td><%= link_to 'Destroy Student', student, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <tr>
+        <td><%= link_to 'Add Parent', new_parent_path(student) %></td>
+        <td><%= link_to 'Add Grades', new_grade_path(student) %></td>
+      </tr>
+    </table>
+  <% end %>
+
+  <p></p>
+  <p><%= link_to 'Add a new student', new_student_path(teacher) %></p>

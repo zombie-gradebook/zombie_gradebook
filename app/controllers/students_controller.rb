@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    # @student.teacher = Teacher.find(params[:format])
   end
 
   # GET /students/1/edit

@@ -19,10 +19,37 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.text_field :password %>
+
+  <h3>Students</h3>
+
+  <div class="subfield">
+    <%= f.label :name %><br>
   </div>
+  <div class="subfield">
+    <%= f.label :email %><br>
+  </div>
+  <div class="subfield">
+    <%= f.label :password %><br>
+  </div>
+
+  <%= f.fields_for :students do |ff| %>
+    <div>
+      <div class="subfield">
+        <%= ff.text_field :name %>
+      </div>
+      <div class="subfield">
+        <%= ff.text_field :email %>
+      </div>
+      <div class="subfield">
+        <%= ff.text_field :password %>
+      </div>
+      <div class="subfield">
+        <%= ff.check_box :_destroy %>
+        <%= ff.label :_destroy %><br>
+      </div>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
