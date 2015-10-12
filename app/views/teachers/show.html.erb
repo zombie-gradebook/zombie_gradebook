@@ -14,11 +14,18 @@
   <%= @teacher.id %>
 </p>
 
-<h4>Students</h4>
+<h3>Students</h3>
 
-<% @teacher.students.each do |student| %>
-  <p><%= student.name %></p>
-<% end %>
+  <% @teacher.students.each do |student| %>
+      <p><%= student.name %></p>
+      <p><%= student.email %></p>
+      <h5>Grades</h5>
+      <% student.grades.each do |grade| %>
+        <p>Assignment: <%= grade.assignment_name %> Grade: <%= grade.grade %> |
+        <% end %>
+  <% end %>
 
-<%= link_to 'Edit Student Info', edit_teacher_path(@teacher) %> |
-<%= link_to 'Back', teachers_path %>
+
+
+<%= link_to 'Edit Info', edit_teacher_path(@teacher) %> |
+<%= link_to 'Teacher Index', teachers_path %>

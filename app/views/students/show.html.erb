@@ -12,8 +12,14 @@
 
 <p>
   <strong>Teacher:</strong>
-  <%= @student.teacher_id %>
+  <%= @student.teacher.name%>
 </p>
 
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
+
+<h3>Grades</h3>
+
+  <% students.each do |student| %>
+      <p><%= student.name %></p>
+      <p><%= student.email %></p>
+      <p><%= link_to 'Add/ Edit Grades' grade_path(grade) %>
+  <% end %>

@@ -1,4 +1,6 @@
 
+
+
 <h1>Listing Grades</h1>
 
 <table>
@@ -11,7 +13,7 @@
   </thead>
 
   <tbody>
-    <% @grades.each do |grade| %>
+    <% student.grades.each do |grade| %>
       <tr>
         <td><%= grade.assignment_name %></td>
         <td><%= grade.student_id %></td>

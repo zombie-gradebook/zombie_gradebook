@@ -4,9 +4,9 @@ class GradesController < ApplicationController
   # before_action :teacher?, only: [:index, :new]
 
   # GET /grades
-  def index
-    @grades = Grade.all
-  end
+  # def index
+  #   @grades = Grade.all
+  # end
 
   # GET /grades/1
   def show

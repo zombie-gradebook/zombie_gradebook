@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+ .subfield {
+   display: inline-block;
+   width: 200px;
+ }
+
+ .subsubfield {
+   display: inline-block;
+   width: 200px;
+ }

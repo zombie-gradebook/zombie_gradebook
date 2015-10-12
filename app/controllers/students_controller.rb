@@ -1,7 +1,8 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
   before_action :logged_in?
-  before_action :allow_access?, only: [:new, :edit, :create, :update, :destroy, :index]
+  before_action :allow_access?, only: [:new, :edit, :create, :update, :destroy]
+  before_action :restrict_access?, only: [:index]
 
   # GET /students
   def index
@@ -57,7 +58,8 @@ class StudentsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def student_params
-    params.require(:student).permit(:name, :email, :password, :teacher_id)
+    params.require(:student).permit(:name, :email, :password, :teacher_id,
+    grades_attributes: [:assignment_name, :grade])
   end
 
   def allow_access?
@@ -72,6 +74,12 @@ class StudentsController < ApplicationController
       redirect_to login_path, notice: "You don't have access to this"
     end
 
+  end
+
+  def restrict_access?
+    unless session[:user_type]=="admin"
+      redirect_to login_path, notice: "You don't have access to this"
+    end
   end
 
 end

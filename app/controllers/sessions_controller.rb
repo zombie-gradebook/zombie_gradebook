@@ -9,17 +9,17 @@ class SessionsController < ApplicationController
     if teacher && teacher.authenticate(params[:password])
       session[:user_id]= teacher.id
       session[:user_type]= "teacher"
-      redirect_to teachers_path, notice: "Login successful"
+      redirect_to teacher_path(teacher), notice: "Login successful"
     elsif
       parent && parent.authenticate(params[:password])
       session[:user_id]= parent.id
       session[:user_type]="parent"
-      redirect_to parents_path, notice: "Login successful"
+      redirect_to parent_path(parent), notice: "Login successful"
     elsif
       student && student.authenticate(params[:password])
       session[:user_id]=student.id
       session[:user_type]= "student"
-      redirect_to students_path, notice: "Login successful"
+      redirect_to student_path(student), notice: "Login successful"
     else
       redirect_to login_path, notice: "Invalid email/password combination"
     end

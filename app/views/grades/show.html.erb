@@ -9,5 +9,13 @@
   <%= @grade.student_id %>
 </p>
 
+
+<% @student.grades.each do |student| %>
+    <p><%= @grade.assignment_name %></p>
+    <p><%= @grade.grade %></p>
+    <p><%= link_to 'Add/ Edit Grades', grade_path(student) %>
+<% end %>
+
+
 <%= link_to 'Edit', edit_grade_path(@grade) %> |
 <%= link_to 'Back', grades_path %>

@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+  <f.fields_for :teacher %>
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -19,8 +19,6 @@
     <%= f.label :email %><br>
     <%= f.text_field :email %>
   </div>
-
-  <h3>Students</h3>
 
   <div class="subfield">
     <%= f.label :name %><br>
@@ -33,21 +31,44 @@
   </div>
 
   <%= f.fields_for :students do |ff| %>
+  <h5> Student <h5>
     <div>
       <div class="subfield">
+        <%= ff.label :name %><br>
         <%= ff.text_field :name %>
       </div>
       <div class="subfield">
+        <%= ff.label :email %><br>
         <%= ff.text_field :email %>
       </div>
       <div class="subfield">
+        <%= ff.label :password %><br>
         <%= ff.text_field :password %>
       </div>
       <div class="subfield">
         <%= ff.check_box :_destroy %>
         <%= ff.label :_destroy %><br>
       </div>
+      <p>
     </div>
+
+<h5>Assignments</h5>
+  <%= f.fields_for :grades do |fff| %>
+    <div>
+      <div class= "subsubfield">
+        <%= fff.label :Assignment_Name %><br>
+        <%= fff.text_field :assignment_name %>
+      </div>
+      <div class= "subsubfield">
+        <%= fff.label :grade %><br>
+        <%= fff.text_field :grade %>
+      </div>
+      <div class="subsubfield">
+        <%= fff.check_box :_destroy %>
+        <%= fff.label :_destroy_assignment %><br>
+      </div>
+      <p>
+    <% end %>
   <% end %>
 
   <div class="actions">
